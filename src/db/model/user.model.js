@@ -39,17 +39,13 @@ const userSchema = new Schema({
 },
 
     {
+        toJSON: { virtuals: true, },
+        toObject: { virtuals: true, },
         timestamps: true,
         strict: true,
         strictQuery: true
     })
-userSchema.virtual(fullName).set(function (value) {
-    if (value) {
-        const [f_name, l_name] = value.split(" ")
-        this.f_name = f_name
-        this.l_name = l_name
-    }
-}).get(function () {
-    return `${this.f_name} ${l_name}`
+userSchema.virtual("fullName").get(function () {
+    return `${this.f_name} ${this.l_name}`
 })
 export const userModel = mongoose.model("user", userSchema)
