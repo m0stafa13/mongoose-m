@@ -23,6 +23,7 @@ export const createUser = async (body) => {
         }
     }
 }
+// get all users 
 export const getAllUsers = async () => {
     let users = await userModel.find().select("-f_name  -l_name")
     try {
@@ -39,3 +40,19 @@ export const getAllUsers = async () => {
         }
     }
 }
+// get user by id 
+export const getUserById = async (data) => {
+    let { id } = data
+    let findUser = await userModel.findById(id).select("-password -f_name -l_name")
+    if (findUser) {
+        return {
+            message: "user founded successfully",
+            user: findUser
+        }
+    } else {
+        return {
+            message: "user not found"
+        }
+    }
+}
+// 
