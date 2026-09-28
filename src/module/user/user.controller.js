@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createUser, deleteUser, getAllUsers, getUserById, updateUser, updateUserSave } from "./user.service.js";
+import { createUser, deleteUser, filter, getAllUsers, getUserById, updateUser, updateUserSave } from "./user.service.js";
 let router = Router()
 // start user api 
 
@@ -37,6 +37,11 @@ router.put("/update-user-save/:id", async (req, res) => {
 router.delete("/delete-user/:id", async (req, res) => {
     let { id } = req.params
     let data = await deleteUser(id)
+    res.json(data)
+})
+// find by any key
+router.get("/find-key-age", async (req, res) => {
+    let data = await filter(req.query)
     res.json(data)
 })
 

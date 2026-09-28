@@ -128,3 +128,23 @@ export const deleteUser = async (id) => {
         }
     }
 }
+// search or filter 
+export const filter = async (query) => {
+    try {
+        let find = await userModel.find(query)
+        if (find.length > 0) {
+            return {
+                message: "user founded successfully",
+                user: find
+            }
+        } else {
+            return {
+                message: "user not found"
+            }
+        }
+    } catch (error) {
+        return {
+            message: "invalid data add data in correct way--"
+        }
+    }
+}

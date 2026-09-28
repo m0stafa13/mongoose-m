@@ -13,3 +13,6 @@ app.use("/auth", userRouter)
 app.use("/posts", postRouter)
 
 app.listen(env.port, () => console.log(`Example app listening on port ${env.port}!`))
+
+
+// need to add comment and post schema 
