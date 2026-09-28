@@ -7,7 +7,7 @@ const app = express()
 app.use(express.json())
 // database connection 
 dbConnection()
-//use to user router 
+//use to user router             
 app.use("/auth", userRouter)
 // use to posts router
 app.use("/posts", postRouter)
