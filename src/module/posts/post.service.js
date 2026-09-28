@@ -56,3 +56,48 @@ export const getPostsAuthor = async () => {
     }
 }
 // populate(authorId)
+
+// update post by id
+export const updatePost = async (iD, data) => {
+    let { id } = iD
+    let { title, content } = data
+    console.log(id);
+    try {
+        let update = await postModel.findOneAndUpdate({ _id: id }, { title, content }, { returnDocument: "after" }).select("-_id -__v -authorId")
+        if (update) {
+            return {
+                message: "user updated successfully ",
+                updatedPost: update
+            }
+        } else {
+            return {
+                message: "something went wrong"
+            }
+        }
+    } catch (error) {
+        return {
+            message: "post id is not correct"
+        }
+    }
+}
+// delete post by id 
+export const deletePost = async ({ id }) => {
+    try {
+        let del = await postModel.findOneAndDelete({ _id: id })
+        if (del) {
+            return {
+                message: "post deleted successfully"
+            }
+        } else {
+            return {
+                message: "post not found"
+            }
+        }
+    } catch (error) {
+        return {
+            message: "invalid input"
+        }
+    }
+}
+
+// get post by id 
