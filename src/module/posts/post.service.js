@@ -99,5 +99,28 @@ export const deletePost = async ({ id }) => {
         }
     }
 }
-
 // get post by id 
+export const getPostById = async (id) => {
+    try {
+        let post = await postModel.findById(id).populate({
+            path: "authorId",
+            select: "fullName email  age "
+        }).select("-_id -__v")
+        if (post) {
+            return {
+                message: "post founded successfully",
+                post
+            }
+        } else {
+            return {
+                message: "post not found"
+            }
+        }
+    } catch (error) {
+        return {
+            message: "invalid data input change id and try again"
+        }
+    }
+}
+
+

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createPost, deletePost, getPosts, getPostsAuthor, updatePost } from "./post.service.js";
+import { createPost, deletePost, getPostById, getPosts, getPostsAuthor, updatePost } from "./post.service.js";
 const router = Router()
 // start posts apis 
 // get posts only
@@ -26,6 +26,12 @@ router.put("/update-post/:id", async (req, res) => {
 router.delete("/delete-post/:id", async (req, res) => {
     let data = await deletePost(req.params)
     res.json(data)
+})
+// find post by id 
+router.get("/find-post-by/:id", async (req, res) => {
+    let { id } = req.params
+    let data = await getPostById(id)
+    res.json(data)  
 })
 
 
