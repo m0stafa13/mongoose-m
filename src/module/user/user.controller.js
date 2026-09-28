@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createUser, getAllUsers, getUserById, updateUser, updateUserSave } from "./user.service.js";
+import { createUser, deleteUser, getAllUsers, getUserById, updateUser, updateUserSave } from "./user.service.js";
 let router = Router()
 // start user api 
 
@@ -33,7 +33,12 @@ router.put("/update-user-save/:id", async (req, res) => {
     let data = await updateUserSave(id, req.body)
     res.json(data)
 })
+// delete user 
+router.delete("/delete-user/:id", async (req, res) => {
+    let { id } = req.params
+    let data = await deleteUser(id)
+    res.json(data)
+})
 
 
-
-export default router
+export default router 

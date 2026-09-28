@@ -108,3 +108,23 @@ export const updateUserSave = async (id, userData) => {
         }
     }
 }
+// delete user 
+export const deleteUser = async (id) => {
+    try {
+        // in findOneAndUpdate ==> must write in {_id :id }==> عشان ميمسحش الداتابيز كلها 
+        let del = await userModel.findOneAndDelete({ _id: id })
+        if (del) {
+            return {
+                message: "user deleted successfully"
+            }
+        } else {
+            return {
+                message: "user not found"
+            }
+        }
+    } catch (error) {
+        return {
+            message: "id is not in write way"
+        }
+    }
+}
